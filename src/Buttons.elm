@@ -31,11 +31,15 @@ update msg model =
       model - 1
 
     Set x ->
-        case (String.toInt x) of
-            Just a ->
-                a
-            Nothing ->
-                0
+        toIntWithDefault x
+
+toIntWithDefault : String -> Int
+toIntWithDefault input =
+    case (String.toInt input) of
+                Just a ->
+                    a
+                Nothing ->
+                    0
 
 -- VIEW
 view : Model -> Html Msg
