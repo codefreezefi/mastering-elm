@@ -12,4 +12,9 @@ suite =
         1
         |> update Buttons.Increment
         |> Expect.equal 2
+      , test "decrement does -1" <|
+      \_ ->
+        1
+        |> update Buttons.Decrement
+        |> Expect.equal 0
       ]
