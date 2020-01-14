@@ -30,6 +30,10 @@ suite =
                 \_ ->
                     update (Buttons.Set "88-8") 1
                     |> Expect.equal 0
+            , test "return 555 if passing \"555\"" <|
+                \_ ->
+                    update (Buttons.Set "555") 1
+                    |> Expect.equal 555
         ]
     ]
 
