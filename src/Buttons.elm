@@ -1,8 +1,9 @@
 module Buttons exposing (..)
 
 import Browser
-import Html exposing (Html, button, div, text)
-import Html.Events exposing (onClick)
+import Html exposing (Html, button, div, input, p, text)
+import Html.Attributes exposing (type_)
+import Html.Events exposing (onClick, onInput)
 
 -- MAIN
 main =
@@ -18,6 +19,7 @@ init =
 type Msg
   = Increment
   | Decrement
+  | Set String
 
 update : Msg -> Model -> Model
 update msg model =
@@ -28,11 +30,20 @@ update msg model =
     Decrement ->
       model - 1
 
+    Set x ->
+        case (String.toInt x) of
+            Just a ->
+                a
+            Nothing ->
+                0
+
 -- VIEW
 view : Model -> Html Msg
 view model =
   div []
-    [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (String.fromInt model) ]
-    , button [ onClick Increment ] [ text "+" ]
+    [ text "Please input your start value"
+    , div [] [ input [ type_ "number", onInput (\value -> Set ( value)) ] [] ]
+    , p [] [ button [ onClick Decrement ] [ text "-" ]
+            , div [] [ text (String.fromInt model) ]
+            , button [ onClick Increment ] [ text "+" ]]
     ]
